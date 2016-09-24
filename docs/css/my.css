@@ -1,0 +1,14 @@
+.center {
+	text-align: center;
+	}
+
+body#fancy {
+	margin-left:5em;
+	margin-right:5em;
+	font-family:'sans-serif'
+	}
+	
+img#ss {
+	max-width:325px;
+	width:100%;
+	}
