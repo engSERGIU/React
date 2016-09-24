@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        app {
+            keyAlias 'react'
+            keyPassword 'PhRbRJPET7MGM975KymhxrJstTRGpMdpjTWy9YgbNV4P6QaMTX8ygcY2FzuZWsHpdhN7W8zbFeH8C9nfvA8uKsqLkFTvStHAHpHKjbbJS5crURQcBEpuxfGPq99qhMtW28NUgXCMJXQJBzGwpa33tjYLkmZXWWwrtEcu6hB3QcNAnecxyL6rbusKzWU5XXrF7rm35wNabqUhPW8jwh7HguBaNhQmxYrRmQCJEkgcaf3jFAf6ecRcLXAeMdZRPSr4P4CvyzDV8XSavxxM5Ka3z63MDK4p6DWzmDNAvrBT5NaQs5rYGCcJx3tF'
+            storeFile file('/home/j/z7/dev/_arhiva/_altele/keystore/my-release-key.keystore')
+            storePassword 'xn8cM8dAzntYwZbmMbBqH8MahmnqgZk5HA43z2Fs3Emvbcav3JxX7JtVwRjPZ2fyqvCbtwHrjhZkZqmKQFQ2p7VLJELwM3JHHtBUFajDDpJD4xuHa5Fr6CfT9QFBGCXkHg8caAMLdn4AfRUPGdyqu8c6vuQ9RHCcnuwcccPgA94ce9yQFyQtHTmQ53UUQBh4GYatBWn6r94ftjY52kEQcXYRb8x6MkvKNrQStW8wVREnmV4FYxV7fjeJcGZ9PNV8KyW2P6dYjUACfMNwpf5PGgBBsGuthSRb'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId 'io.github.baiatbun.react'
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName '1.2.1'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+}
