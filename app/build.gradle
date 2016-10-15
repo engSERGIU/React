@@ -12,7 +12,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId 'io.github.baiatbun.react'
+        applicationId 'io.github.engSERGIU.react'
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

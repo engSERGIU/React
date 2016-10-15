@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.baiatbun.react">
+    package="io.github.engSERGIU.react">
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.baiatbun.react.MainActivity" />
+                android:value="io.github.engSERGIU.react.MainActivity" />
         </activity>
     </application>
 
