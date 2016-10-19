@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int streamType = AudioManager.STREAM_MUSIC;
     private boolean loaded;
     private int shootSound;
+    private long record = 999999999;
 
 
     @Override
@@ -184,7 +185,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "go":
                 this.state = "ready";
-                String message = String.format("Ready\n%d ms", SystemClock.uptimeMillis() - initialTime);
+                Long reaction_time = SystemClock.uptimeMillis() - initialTime;
+                if(reaction_time < record){
+                    record = reaction_time;
+                    setTitle(String.format("React - Record: %d ms", reaction_time));
+                }
+                String message = String.format("Ready\n%d ms", reaction_time);
                 changeColor(button, Color.parseColor("#ffcc00"), message);
                 break;
             case "tooFast":
