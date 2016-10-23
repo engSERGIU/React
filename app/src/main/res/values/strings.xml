@@ -4,8 +4,8 @@
     <string name="about">About</string>
     <string name="title_activity_about">About React</string>
     <string name="about_content">\n
-        Source: <a href="https://github.com/baiatBun/React">https://github.com/baiatBun/React</a>\n
-        Webpage: <a href="https://baiatbun.github.io/React">https://baiatbun.github.io/React</a>\n\n
+        Source: <a href="https://github.com/baiatBun/React">https://github.com/engSERGIU/React</a>\n
+        Webpage: <a href="https://baiatbun.github.io/React">https://engSERGIU.github.io/React</a>\n\n
         The application measures your <b>reaction time</b>.
         Simple reaction time is the motion required for an observer to respond to the presence of a stimulus.
         Mean RT for college-age individuals is about 160 milliseconds to detect an auditory stimulus,

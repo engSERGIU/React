@@ -1,4 +1,4 @@
-package io.github.baiatbun.react;
+package io.github.engsergiu.react;
 
 import org.junit.Test;
 

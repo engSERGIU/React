@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="io.github.baiatbun.react.MainActivity">
+    tools:context="io.github.engsergiu.react.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
