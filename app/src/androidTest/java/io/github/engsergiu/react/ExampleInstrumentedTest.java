@@ -1,4 +1,4 @@
-package io.github.baiatbun.react;
+package io.github.engsergiu.react;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("io.github.baiatbun.react", appContext.getPackageName());
+        assertEquals("io.github.engsergiu.react", appContext.getPackageName());
     }
 }
