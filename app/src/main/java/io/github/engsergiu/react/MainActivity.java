@@ -2,6 +2,7 @@ package io.github.engsergiu.react;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String PREFS = "prefs";
+
     final long MAX = 4_000; //the latest time when the screen may turn from set to go
     final long MIN = 1_000; //the earliest time when the screen may turn from set to go
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int streamType = AudioManager.STREAM_MUSIC;
     private boolean loaded;
     private int shootSound;
+    private long record = 999999999;
 
 
     @Override
@@ -45,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // read record from shared preference
+        SharedPreferences sp = getSharedPreferences(PREFS, 0);
+        long stored_record = sp.getLong("record", 999999999);
+        if (stored_record != 999999999){
+            record = stored_record;
+            setTitle(String.format("React - Record: %d ms", record));
+        }
 
         this.state = "ready";   //initialize the state
         Button button = (Button) findViewById(R.id.button);
@@ -74,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         loadSound();
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        SharedPreferences sp = getSharedPreferences(PREFS, 0);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putLong("record", record);
+        editor.commit();
+    }
 
     /**
      * Load sounds
@@ -184,7 +206,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "go":
                 this.state = "ready";
-                String message = String.format("Ready\n%d ms", SystemClock.uptimeMillis() - initialTime);
+                Long reaction_time = SystemClock.uptimeMillis() - initialTime;
+                if(reaction_time < record){
+                    record = reaction_time;
+                    setTitle(String.format("React - Record: %d ms", reaction_time));
+                }
+                String message = String.format("Ready\n%d ms", reaction_time);
                 changeColor(button, Color.parseColor("#ffcc00"), message);
                 break;
             case "tooFast":
