@@ -1,8 +1,8 @@
 # React
 
-[<img src="https://f-droid.org/badge/get-it-on.png"
+[<img src="https://raw.githubusercontent.com/engSERGIU/React/master/docs/img/f-droid.png"
       alt="Get it on F-Droid"
-      height="80">](https://f-droid.org/app/io.github.engsergiu.react)
+      height="120">](https://f-droid.org/app/io.github.engsergiu.react)
 
 The application tests your [reaction time](https://en.wikipedia.org/wiki/Mental_chronometry).
 
