@@ -2,7 +2,7 @@
 
 [<img src="https://raw.githubusercontent.com/engSERGIU/React/master/docs/img/f-droid.png"
       alt="Get it on F-Droid"
-      height="105">](https://f-droid.org/app/io.github.engsergiu.react)
+      height="109">](https://f-droid.org/app/io.github.engsergiu.react)
 
 The application tests your [reaction time](https://en.wikipedia.org/wiki/Mental_chronometry).
 
