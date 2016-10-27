@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     final long MAX = 4_000; //the latest time when the screen may turn from set to go
     final long MIN = 1_000; //the earliest time when the screen may turn from set to go
+    private final long SNAILRECORD = 999999999;
 
     private String state;   //the current state of the buttom
     Handler h;  //used for scheduling a screen color change
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int streamType = AudioManager.STREAM_MUSIC;
     private boolean loaded;
     private int shootSound;
-    private long record = 999999999;
+    private long record = SNAILRECORD;
 
 
     @Override
@@ -173,11 +174,16 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
-            //case R.id.action_settings:
-            //    return true;
             case R.id.action_about:
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
+                return true;
+        }
+
+        switch (id) {
+            case R.id.action_resetscore:
+                this.record = this.SNAILRECORD;
+                setTitle("React");
                 return true;
         }
 
@@ -207,8 +213,8 @@ public class MainActivity extends AppCompatActivity {
             case "go":
                 this.state = "ready";
                 Long reaction_time = SystemClock.uptimeMillis() - initialTime;
-                if(reaction_time < record){
-                    record = reaction_time;
+                if(reaction_time < this.record){
+                    this.record = reaction_time;
                     setTitle(String.format("React - Record: %d ms", reaction_time));
                 }
                 String message = String.format("Ready\n%d ms", reaction_time);

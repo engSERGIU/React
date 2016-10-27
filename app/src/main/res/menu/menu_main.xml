@@ -18,4 +18,9 @@
         android:orderInCategory="101"
         android:title="@string/about"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_resetscore"
+        android:orderInCategory="102"
+        android:title="@string/resetscore"
+        app:showAsAction="never" />
 </menu>
