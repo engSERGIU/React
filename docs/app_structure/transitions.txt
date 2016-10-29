@@ -1,0 +1,5 @@
+ready - shows the results and the message "ready"
+set - warns the user that they should be prepared to tap displaying the message
+	"set"
+go - tells the user that they have to tap
+:| - tells the user that they tapped too fast

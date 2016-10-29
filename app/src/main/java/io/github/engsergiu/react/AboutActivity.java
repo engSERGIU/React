@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-
+/**
+ * "About" activity page.
+ * @author Sergiu
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override

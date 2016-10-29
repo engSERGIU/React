@@ -14,25 +14,38 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+
+/**
+ * @author Sergiu
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String PREFS = "prefs";
 
+    //constants
     final long MAX = 4_000; //the latest time when the screen may turn from set to go
     final long MIN = 1_000; //the earliest time when the screen may turn from set to go
-    private final long SNAILRECORD = 999999999;
+    private final long SLOTH_RT = 999999999; //the presumed reaction time of a sloth
 
+    //
     private String state;   //the current state of the buttom
     Handler h;  //used for scheduling a screen color change
     Runnable r; //used for describing the color change
+    final FileHandler logFile = new FileHandler("Android/data/io.github.engsergiu.react", "log.csv");
+
+    //time zone
     long initialTime;  //used for storing the initial and the final times (when the screen changes and when the user taps)
+    private long record = SLOTH_RT;
+    private long redDuration; //duration of the red screen
 
     //declarations used for sound play
     private static final int MAX_STREAMS = 5;
@@ -42,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int streamType = AudioManager.STREAM_MUSIC;
     private boolean loaded;
     private int shootSound;
-    private long record = SNAILRECORD;
 
 
     @Override
@@ -54,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         // read record from shared preference
         SharedPreferences sp = getSharedPreferences(PREFS, 0);
-        long stored_record = sp.getLong("record", 999999999);
-        if (stored_record != 999999999){
+        long stored_record = sp.getLong("record", this.SLOTH_RT);
+        if (stored_record != this.SLOTH_RT) {
             record = stored_record;
             setTitle(String.format("React - Record: %d ms", record));
         }
@@ -88,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
         loadSound();
     }
 
+
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
 
         SharedPreferences sp = getSharedPreferences(PREFS, 0);
@@ -97,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putLong("record", record);
         editor.commit();
     }
+
 
     /**
      * Load sounds
@@ -139,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Play sounds
      */
-    public void playShootSound()  {
-        if(loaded)  {
+    public void playShootSound() {
+        if (loaded) {
             float leftVolume = volume;
             float rightVolume = volume;
             int streamId = this.soundPool.play(this.shootSound, leftVolume, rightVolume, 1, 0, 1f);  // Play sound of gunfire. Returns the ID of the new stream.
@@ -182,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_resetscore:
-                this.record = this.SNAILRECORD;
+                this.record = this.SLOTH_RT;
                 setTitle("React");
                 return true;
         }
@@ -203,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             case "ready":
                 this.state = "set";
                 changeColor(button, Color.RED, "Set");
-                this.h.postDelayed(this.r, this.MIN + (long) (Math.random() * (this.MAX - this.MIN)));
+                this.h.postDelayed(this.r, this.redDuration = this.MIN + (long) (Math.random() * (this.MAX - this.MIN)));
                 break;
             case "set":
                 this.h.removeCallbacks(this.r);
@@ -212,16 +226,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "go":
                 this.state = "ready";
-                Long reaction_time = SystemClock.uptimeMillis() - initialTime;
-                if(reaction_time < this.record){
-                    this.record = reaction_time;
-                    setTitle(String.format("React - Record: %d ms", reaction_time));
+                long reactionTime = SystemClock.uptimeMillis() - initialTime;
+                this.logFile.write(String.format("\"%s\",\"%d\",\"%d\"\n", tellMeTheTime(), reactionTime, this.redDuration));
+                if (reactionTime < this.record) {
+                    this.record = reactionTime;
+                    setTitle(String.format("React - Record: %d ms", reactionTime));
                 }
-                String message = String.format("Ready\n%d ms", reaction_time);
+                String message = String.format("Ready\n%d ms", reactionTime);
                 changeColor(button, Color.parseColor("#ffcc00"), message);
                 break;
             case "tooFast":
                 state = "ready";
+                this.logFile.write(String.format("\"%s\",\"%d\",\"%d\"\n", tellMeTheTime(), -1, this.redDuration));
                 changeColor(button, Color.parseColor("#ffcc00"), "Ready");
                 break;
             default:
@@ -262,5 +278,14 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setNavigationBarColor(color);   //change the navigation bar color
 
         button.setText(text);    //change button text
+    }
+
+    /**
+     * @return the current date and time
+     */
+    private String tellMeTheTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
