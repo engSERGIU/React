@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">React</string>
     <string name="action_settings">Settings</string>
-    <string name="about">/about</string>
-    <string name="resetscore">/resetscore</string>
+    <string name="about">About</string>
+    <string name="resetscore">Reset Score</string>
     <string name="title_activity_about">About React</string>
     <string name="about_content">\n
         Source: <a href="https://github.com/engSERGIU/React">https://github.com/engSERGIU/React</a>\n
@@ -14,4 +14,17 @@
         The mean reaction times for sprinters at the Beijing Olympics were 166 ms for males and 189 ms for females,
             but in one out of 1,000 starts they can achieve 109 ms and 121 ms, respectively.
     </string>
+
+
+    <!-- Reaction -->
+    <string name="go">GO!</string>
+    <string name="ready">Ready</string>
+    <string name="too_fast">Too fast !</string>
+    <string name="set">Set</string>
+
+    <string name="ready_timed">Ready\n%d ms</string>
+    <string name="bar_best">React - Record: %d ms</string>
+    <string name="react">React</string>
+    <string name="portrait">- portrait -</string>
+    <string name="landscape">- landscape -</string>
 </resources>
