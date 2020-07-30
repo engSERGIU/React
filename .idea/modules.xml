@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/React.iml" filepath="$PROJECT_DIR$/React.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/doomsdayrs.React.iml" filepath="$PROJECT_DIR$/.idea/modules/doomsdayrs.React.iml" group="doomsdayrs.React" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/doomsdayrs.React-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/doomsdayrs.React-app.iml" group="doomsdayrs.React/app" />
     </modules>
   </component>
 </project>
